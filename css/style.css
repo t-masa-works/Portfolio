@@ -1,0 +1,949 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0px;
+  background-color: #0a0e17;
+  color: #e0e6ed;
+}
+
+.hero-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#staticImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+
+#openVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+#openVideo #openVideo:hover {
+  opacity: 1;
+}
+
+#fireVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+
+#transitionVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+
+.system-ready {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em; /* メインタイトルより小さく */
+  color: #00ffcc; /* コンソール風の色 */
+  margin-bottom: 10px;
+}
+
+.blink-animation {
+  -webkit-animation: blink 0.5s step-end 6 forwards;
+          animation: blink 0.5s step-end 6 forwards;
+}
+
+.main-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+  -webkit-animation: glitch 4s infinite;
+          animation: glitch 4s infinite;
+}
+
+.skip-text {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  top: 70%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5em;
+  color: #00ffcc;
+  opacity: 1;
+  -webkit-animation: blink 1s step-end infinite;
+          animation: blink 1s step-end infinite;
+}
+
+.click-text {
+  position: absolute;
+  display: none;
+  bottom: 60px;
+  left: 50%;
+  top: 70%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5em;
+  color: #00ffcc;
+  -webkit-animation: blink 1s step-end infinite;
+          animation: blink 1s step-end infinite;
+}
+
+@-webkit-keyframes glitch {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    text-shadow: none;
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+    text-shadow: 4px 0 #0ff, -4px 0 #f0f;
+  }
+  40% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+    text-shadow: -4px 0 #0ff, 4px 0 #f0f;
+  }
+  60% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    text-shadow: none;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    text-shadow: none;
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+    text-shadow: 4px 0 #0ff, -4px 0 #f0f;
+  }
+  40% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+    text-shadow: -4px 0 #0ff, 4px 0 #f0f;
+  }
+  60% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    text-shadow: none;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* ナビゲーションの初期状態：画面外、透明 */
+#global-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(10, 14, 23, 0.95); /* Baseカラー、少し透過 */
+  color: #e0e6ed;
+  z-index: 1000; /* 最前面へ */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%); /* 画面外へ隠す */
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-out, -webkit-transform 0.5s ease-out;
+  transition: opacity 0.5s ease-out, -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out, -webkit-transform 0.5s ease-out; /* スムーズな遷移 */
+}
+#global-nav.active {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); /* 画面内に戻す */
+  opacity: 1;
+}
+#global-nav ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
+}
+#global-nav a {
+  text-decoration: none;
+  color: #e0e6ed;
+  font-weight: bold;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+#global-nav a:hover {
+  color: #00f2fe; /* ホバー時に青い炎の残像 */
+}
+
+section {
+  padding: 100px 20px;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; /* 垂直方向中央揃え */
+  gap: 50px; /* アイテム間の余白 */
+}
+
+.item-left {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 40%;
+          flex: 1 1 40%; /* 幅を40%に */
+}
+
+.item-right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 60%;
+          flex: 1 1 60%; /* 幅を60%に */
+}
+
+#profVideo {
+  width: 100%;
+  max-height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-skills {
+  background-color: #0a0e17;
+  color: #e0e6ed;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-title .accent {
+  color: #00f2fe;
+}
+
+.points li {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #cbd5e0;
+}
+.points li strong {
+  color: #f6ad55;
+}
+
+.section-intro {
+  text-align: center;
+  margin-bottom: 60px;
+  color: #a0aec0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.skill-card {
+  position: relative;
+  background: #1a202c; /* 内側の色 */
+  border-radius: 12px;
+  z-index: 1;
+  overflow: hidden;
+  padding: 3px; /* 線の太さ分の隙間を作る */
+}
+.skill-card .card-inner {
+  background: #1a202c;
+  border-radius: 10px;
+  padding: 35px;
+  height: 87%;
+  z-index: 2;
+  position: relative;
+}
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(transparent, #00f2fe, transparent 40%);
+  z-index: -1;
+  -webkit-transform: translate(-50%, -50%) rotate(0deg);
+          transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+.skill-card:hover::before {
+  opacity: 1;
+  -webkit-animation: rotateBorder 2s linear infinite;
+          animation: rotateBorder 2s linear infinite;
+}
+.skill-card:hover .skill-icon-img {
+  -webkit-filter: drop-shadow(0 0 12px rgb(0, 242, 254)) drop-shadow(0 0 20px rgba(0, 242, 254, 0.6));
+          filter: drop-shadow(0 0 12px rgb(0, 242, 254)) drop-shadow(0 0 20px rgba(0, 242, 254, 0.6));
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15); /* 少しだけ前に出る動き */
+}
+.skill-card:hover .assist-btn {
+  -webkit-animation: bounce 1s ease-in-out infinite;
+          animation: bounce 1s ease-in-out infinite;
+}
+.skill-card h3 {
+  color: #00f2fe;
+  margin-bottom: 15px;
+}
+.skill-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5e0;
+}
+
+.skill-card-desc {
+  top: 10px;
+  right: 10px;
+  width: 100%;
+  height: 200px;
+  z-index: 3;
+}
+.skill-card-desc .paper-plane {
+  width: 100%;
+  height: 100%;
+  bottom: 10px;
+  left: 10px;
+  -webkit-transition: opacity 0.8s, -webkit-transform 0.8s ease-in-out;
+  transition: opacity 0.8s, -webkit-transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out, opacity 0.8s;
+  transition: transform 0.8s ease-in-out, opacity 0.8s, -webkit-transform 0.8s ease-in-out;
+  opacity: 0.2;
+}
+.skill-card-desc .coding-video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.skill-card-desc:hover .paper-plane {
+  opacity: 1;
+  -webkit-transform: translate(350px, -200px) scale(1.2);
+          transform: translate(350px, -200px) scale(1.2);
+}
+
+@-webkit-keyframes rotateBorder {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes rotateBorder {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.skill-icon .skill-icon-img {
+  width: 80px;
+  height: 80px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  /* 常時：微かにネオンを光らせ、呼吸アニメーションを適用 */
+  -webkit-filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.6));
+          filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.6));
+  -webkit-animation: iconPulse 4s ease-in-out infinite;
+          animation: iconPulse 4s ease-in-out infinite;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+@-webkit-keyframes iconPulse {
+  0%, 100% {
+    -webkit-filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+            filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+    opacity: 0.75;
+  }
+  50% {
+    -webkit-filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.8));
+            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.8));
+    opacity: 1;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    -webkit-filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+            filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+    opacity: 0.75;
+  }
+  50% {
+    -webkit-filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.8));
+            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.8));
+    opacity: 1;
+  }
+}
+/* Before/Afterスライダーのベース */
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 16/9; /* バナーの比率に合わせる */
+  overflow: hidden;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 15px rgba(0, 255, 204, 0.2);
+          box-shadow: 0 4px 15px rgba(0, 255, 204, 0.2);
+}
+.comparison-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* After画像をクリッピングするラッパー */
+.img-after-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* 初期値は半分 */
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* スライダー操作バー（透明にして上にかぶせる） */
+.slider-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: ew-resize;
+}
+
+/* 見た目用のラインとボタン */
+.slider-line {
+  position: absolute;
+  top: 0;
+  left: 50%; /* 初期値 */
+  width: 2px;
+  height: 100%;
+  background: #00ffcc;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: #111;
+  border: 2px solid #00ffcc;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 切り替えボタンのデザイン（サイバー風） */
+.assist-btn {
+  margin-top: 15px;
+  background: transparent;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  padding: 5px 10px;
+  font-family: "Courier New", monospace;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.assist-btn:hover {
+  background: #00ffcc;
+  color: #000;
+}
+.assist-btn #uxCard.accessible-mode {
+  background: #ffffff !important; /* 真っ白な背景 */
+  color: #000000 !important; /* 真っ黒な文字でコントラスト最大化 */
+  border: 4px solid #00ffcc; /* はっきりとした境界線 */
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05); /* 少し大きくして視認性アップ */
+  -webkit-box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
+#uxCard.accessible-mode h3 {
+  color: #f6ad55; /* アクセントカラーでタイトルを強調 */
+  font-size: 1.5rem; /* 文字を大きく */
+  border-bottom: 2px solid #00ffcc;
+}
+#uxCard.accessible-mode p {
+  font-size: 1.1rem; /* テキストも大きく */
+  font-weight: bold; /* 読みやすい太字 */
+  line-height: 1.8;
+}
+#uxCard.accessible-mode .assist-btn {
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #000000;
+  font-family: sans-serif; /* 読みやすいフォントへ変更 */
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+/* ==========================================================================
+   Section 3: Projects (制作実績)
+   ========================================================================== */
+.section-projects {
+  background: #0a0e17;
+}
+.section-projects .project-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 50px;
+  background: #1a202c;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+@media screen and (max-width: 767px) {
+  .section-projects .project-card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+}
+.section-projects .project-image {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 60%;
+          flex: 1 1 60%;
+  min-height: 250px;
+  background: #2d3748;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.section-projects .project-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.section-projects .project-info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 40%;
+          flex: 1 1 40%;
+}
+.section-projects .project-info .project-tag {
+  color: #00f2fe;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+.section-projects .project-info .project-desc {
+  color: #cbd5e0;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.section-projects .project-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.section-projects .project-table th,
+.section-projects .project-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  text-align: left;
+}
+.section-projects .project-table th {
+  color: #a0aec0;
+  width: 30%;
+}
+
+/* ==========================================================================
+   Section 4: Mission (介護経験 × UXの融合)
+   ========================================================================== */
+.section-mission {
+  position: relative;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(10, 10, 15, 0.45)), to(rgba(10, 10, 15, 0.85))), url("../Images/cross-hand.jpg");
+  background-image: linear-gradient(rgba(10, 10, 15, 0.45), rgba(10, 10, 15, 0.85)), url("../Images/cross-hand.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* これを指定するだけでパララックス（視差効果）になります！ */
+  overflow: hidden;
+}
+.section-mission .mission-text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-mission .mission-text .section-title-left {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.section-mission .mission-text .accent-gold {
+  color: #f6ad55;
+  text-shadow: 0 0 10px rgba(246, 173, 85, 0.3);
+}
+.section-mission .mission-text h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.section-mission .mission-text p {
+  color: #cbd5e0;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.section-mission .mission-text p strong {
+  color: #f6ad55;
+}
+
+/* ==========================================================================
+   フェードイン ＆ ハイライト アニメーション
+   ========================================================================== */
+/* 1. 初期状態：文章全体を少し下に配置し、透明にする */
+.fade-up-trigger {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+          transform: translateY(30px);
+  -webkit-transition: opacity 1.2s ease-out, -webkit-transform 1.2s ease-out;
+  transition: opacity 1.2s ease-out, -webkit-transform 1.2s ease-out;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out, -webkit-transform 1.2s ease-out;
+}
+.fade-up-trigger.is-active {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+/* 3. マーカーの初期状態：左側に縮めておく */
+.marker-highlight {
+  position: relative;
+  display: inline; /* 折り返しに対応 */
+  background: none; /* デフォルトの太字背景をクリア */
+  font-weight: bold;
+}
+.marker-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45%; /* マーカーの太さ（お好みで調整してください） */
+  background: -webkit-gradient(linear, left top, right top, from(rgba(212, 175, 55, 0.6)), to(rgba(255, 230, 0, 0.4)));
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.6) 0%, rgba(255, 230, 0, 0.4) 100%);
+  z-index: -1; /* 文字の背景に回り込ませる */
+  /* 初期状態は左側に幅0%で隠す */
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  /* 文章全体のフェードインが終わる頃に動き出すよう、ディレイ（0.8秒）を設定 */
+  -webkit-transition: -webkit-transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
+  transition: -webkit-transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s, -webkit-transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
+}
+
+/* 4. マーカーのアクティブ状態：左から右へ100%展開 */
+.fade-up-trigger.is-active .marker-highlight::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+/* ==========================================================================
+   Section 5: Contact (コンタクト)
+   ========================================================================== */
+.section-contact {
+  padding: 100px 0;
+  background: #0a0e17;
+  text-align: center;
+}
+.section-contact .contact-lead {
+  color: #a0aec0;
+  margin-bottom: 40px;
+}
+.section-contact .contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  background: #1a202c;
+  padding: 40px;
+  border-radius: 16px;
+}
+@media screen and (max-width: 767px) {
+  .section-contact .contact-form {
+    padding: 25px;
+  }
+}
+.section-contact .form-group {
+  margin-bottom: 20px;
+}
+.section-contact .form-group label {
+  display: block;
+  color: #a0aec0;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+.section-contact .form-group input,
+.section-contact .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: #1a202c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #fff;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+.section-contact .form-group input:focus,
+.section-contact .form-group textarea:focus {
+  border-color: #00f2fe;
+  outline: none;
+}
+.section-contact .submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #00f2fe, #00b8ff);
+  border: none;
+  border-radius: 6px;
+  color: #0a0e17;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  transition: -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+}
+.section-contact .submit-btn:hover {
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+          box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+}
+
+/* ==========================================================================
+   Footer (フッター)
+   ========================================================================== */
+.global-footer {
+  background: #06090f;
+  padding: 40px 20px;
+  color: #718096;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+  opacity: 0;
+  display: none;
+}
+.global-footer .footer-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .global-footer .footer-flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    gap: 30px;
+    text-align: center;
+  }
+}
+.global-footer .footer-left .footer-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00f2fe;
+  margin-bottom: 8px;
+}
+.global-footer .footer-left .footer-logo .accent {
+  color: #00f2fe;
+}
+.global-footer .footer-left .footer-copy {
+  font-size: 0.8rem;
+}
+.global-footer .footer-right .footer-links {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+@media screen and (max-width: 767px) {
+  .global-footer .footer-right .footer-links {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 15px 20px;
+  }
+}
+.global-footer .footer-right .footer-links a {
+  text-decoration: none;
+  color: #a0aec0;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+.global-footer .footer-right .footer-links a:hover {
+  color: #00f2fe;
+}

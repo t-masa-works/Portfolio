@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+.hero-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#staticImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+#openVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#openVideo:hover {
+  opacity: 1;
+}
+
+#fireVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#transitionVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* #fireVideo, #openVideo, #transitionVideo {
+  pointer-events: none;
+} */
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+}
+
+.system-ready {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.5em; /* メインタイトルより小さく */
+  color: #00ffcc; /* コンソール風の色 */
+  margin-bottom: 10px;
+}
+
+.blink-animation {
+  animation: blink 0.5s step-end 6 forwards;
+}
+
+.main-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: glitch 4s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  20% {
+    transform: translate(-2px, 2px);
+    text-shadow:
+      4px 0 #0ff,
+      -4px 0 #f0f;
+  }
+  40% {
+    transform: translate(2px, -2px);
+    text-shadow:
+      -4px 0 #0ff,
+      4px 0 #f0f;
+  }
+  60% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+}
+
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
