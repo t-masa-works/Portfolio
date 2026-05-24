@@ -269,7 +269,14 @@ section {
   position: relative;
   border: 2px solid #00ffcc; /* ネオンの細い線 */
   /* 四隅の角を少しだけ斜めにカットするサイバーエフェクト */
-  clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  clip-path: polygon(
+    0 20px,
+    20px 0,
+    100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%
+  );
   box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); /* 外側へのほのかな発光 */
   border-radius: 0; /* clip-pathを使うため、角丸は不要に */
   overflow: hidden;
@@ -280,7 +287,14 @@ section {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
-  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  clip-path: polygon(
+    0 15px,
+    15px 0,
+    100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    0 100%
+  );
   // border: 1px solid #00ffcc; /* 必要に応じてネオンの細い線を引く */
 }
 
@@ -312,7 +326,7 @@ section {
 }
 
 /* ==========================================================================
-   Section 2: Skills (制作実績)
+   Section 2: Skills (制作スキル)
    ========================================================================== */
 .section-intro {
   text-align: center;
@@ -322,7 +336,7 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 30px;
 }
 
@@ -333,6 +347,12 @@ section {
   z-index: 1;
   overflow: hidden;
   padding: 3px; /* 線の太さ分の隙間を作る */
+
+  @media (hover: none) {
+    /* タッチデバイスでは常に枠をほんのり光らせておく */
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  }
 
   .card-inner {
     background: #1a202c;
@@ -404,6 +424,12 @@ section {
       transform 0.8s ease-in-out,
       opacity 0.8s;
     opacity: 0.2;
+
+    @media (hover: none) {
+      /* タッチデバイスでは常に表示 */
+      opacity: 1 !important;
+      animation: wave-motion 3s ease-in-out infinite; /* 常時微小に動かすアニメ */
+    }
   }
 
   .coding-video {
@@ -416,7 +442,7 @@ section {
 
   &:hover .paper-plane {
     opacity: 1;
-    transform: translate(350px, -200px) scale(1.2);
+    transform: translate(500px, -200px) scale(1.2);
   }
 }
 
@@ -474,8 +500,47 @@ section {
     height: 100%;
     object-fit: cover;
   }
-}
+  /* ツマミのデザイン拡張 */
+  .slider-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
+    /* 矢印の文字 */
+    .slider-arrow {
+      color: #00ffcc;
+      font-size: 12px;
+      font-weight: bold;
+      animation: pulse-blink 1.5s infinite;
+    }
+
+    /* 上部に浮き出るヒントテキスト */
+    .slider-tip-text {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00ffcc;
+      color: #000;
+      font-size: 9px;
+      font-family: monospace;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      animation: pulse-blink 1.5s infinite;
+    }
+  }
+}
+@keyframes pulse-blink {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 /* After画像をクリッピングするラッパー */
 .img-after-wrapper {
   position: absolute;
@@ -580,6 +645,18 @@ section {
   }
 }
 
+@keyframes wave-motion {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /* ==========================================================================
    Section 3: Projects (制作実績)
    ========================================================================== */
@@ -664,7 +741,7 @@ section {
     url("../Images/cross-hand.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* これを指定するだけでパララックス（視差効果）になります！ */
+  background-attachment: fixed; /* パララックス効果 */
   overflow: hidden;
 
   .mission-text {
