@@ -26,6 +26,10 @@ body {
   color: variables.$text-main;
 }
 
+/* ==========================================================================
+   HeroHeader
+   ========================================================================== */
+
 .hero-container {
   position: relative;
   width: 100vw;
@@ -177,7 +181,9 @@ body {
   }
 }
 
-/* ナビゲーションの初期状態：画面外、透明 */
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
 #global-nav {
   position: fixed;
   top: 0;
@@ -221,6 +227,10 @@ body {
 
 section {
   padding: 100px 20px;
+
+  @include mq(sp) {
+    padding: 60px 15px;
+  }
 }
 
 .main-content {
@@ -231,11 +241,20 @@ section {
   transition: opacity 0.5s ease;
 }
 
+/* ==========================================================================
+   Section 1: About (プロフィール)
+   ========================================================================== */
+
 .flex-container {
   display: flex;
   justify-content: space-between;
   align-items: center; /* 垂直方向中央揃え */
   gap: 50px; /* アイテム間の余白 */
+
+  @include mq(sp) {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
 
 .item-left {
@@ -246,10 +265,23 @@ section {
   flex: 1 1 60%; /* 幅を60%に */
 }
 
+.video-item.item-left {
+  position: relative;
+  border: 2px solid #00ffcc; /* ネオンの細い線 */
+  /* 四隅の角を少しだけ斜めにカットするサイバーエフェクト */
+  clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); /* 外側へのほのかな発光 */
+  border-radius: 0; /* clip-pathを使うため、角丸は不要に */
+  overflow: hidden;
+  background: #000;
+}
+
 #profVideo {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  // border: 1px solid #00ffcc; /* 必要に応じてネオンの細い線を引く */
 }
 
 .section-skills {
@@ -279,6 +311,9 @@ section {
   }
 }
 
+/* ==========================================================================
+   Section 2: Skills (制作実績)
+   ========================================================================== */
 .section-intro {
   text-align: center;
   margin-bottom: 60px;
@@ -721,7 +756,6 @@ section {
    Section 5: Contact (コンタクト)
    ========================================================================== */
 .section-contact {
-  padding: 100px 0;
   background: variables.$bg-base;
   text-align: center;
 
@@ -755,7 +789,7 @@ section {
 
     input,
     textarea {
-      width: 100%;
+      width: calc(100% - 24px);
       padding: 12px;
       background: #1a202c;
       border: 1px solid rgba(255, 255, 255, 0.1);
