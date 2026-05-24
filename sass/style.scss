@@ -794,39 +794,34 @@ section {
   }
 }
 
-/* 3. マーカーの初期状態：左側に縮めておく */
+/* 3. マーカーの設定：擬似要素を使わず、背景でラインを表現する */
 .marker-highlight {
-  position: relative;
   display: inline; /* 折り返しに対応 */
-  background: none; /* デフォルトの太字背景をクリア */
   font-weight: bold;
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 45%; /* マーカーの太さ（お好みで調整してください） */
-    background: linear-gradient(
-      90deg,
-      rgba(212, 175, 55, 0.6) 0%,
-      rgba(255, 230, 0, 0.4) 100%
-    );
-    z-index: -1; /* 文字の背景に回り込ませる */
+  /* ゴールドのグラデーション線を、文字の下半分（45%の高さ）に配置 */
+  background-image: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0.6) 0%,
+    rgba(255, 230, 0, 0.4) 100%
+  );
+  background-repeat: no-repeat;
 
-    /* 初期状態は左側に幅0%で隠す */
-    transform: scaleX(0);
-    transform-origin: left center;
+  /* ★最重要：縦は下側（下から45%の高さ）、横は左端に固定 */
+  background-position: left bottom;
 
-    /* 文章全体のフェードインが終わる頃に動き出すよう、ディレイ（0.8秒）を設定 */
-    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
-  }
+  /* 初期状態は、横幅（ラインの長さ）を 0% にして隠しておく */
+  background-size: 0% 45%;
+
+  /* 文章全体のフェードインが終わる頃に動き出すよう、ディレイ（0.8秒）を設定 */
+  /* transform ではなく、background-size をアニメーションさせます */
+  transition: background-size 1s cubic-bezier(0.25, 1, 0.5, 1) 0.8s;
 }
 
 /* 4. マーカーのアクティブ状態：左から右へ100%展開 */
-.fade-up-trigger.is-active .marker-highlight::after {
-  transform: scaleX(1);
+/* 画面サイズを小さくして、文章が2行・3行に化けても、すべての行に100%線が引かれます */
+.fade-up-trigger.is-active .marker-highlight {
+  background-size: 100% 45%;
 }
 
 /* ==========================================================================
