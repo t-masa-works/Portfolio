@@ -348,6 +348,12 @@ section {
   overflow: hidden;
   padding: 3px; /* 線の太さ分の隙間を作る */
 
+  @media (hover: none) {
+    /* タッチデバイスでは常に枠をほんのり光らせておく */
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  }
+
   .card-inner {
     background: #1a202c;
     border-radius: 10px;
@@ -418,6 +424,13 @@ section {
       transform 0.8s ease-in-out,
       opacity 0.8s;
     opacity: 0.2;
+
+    @media (hover: none) {
+      /* タッチデバイスでは常に表示 */
+      opacity: 1 !important;
+      transform: none !important;
+      animation: wave-motion 3s ease-in-out infinite; /* 常時微小に動かすアニメ */
+    }
   }
 
   .coding-video {
@@ -594,20 +607,20 @@ section {
   }
 }
 
-/* タッチデバイス（スマホ・タブレット）用の調整 */
-@media (hover: none) {
-  /* スマホの時は最初から枠をほんのり光らせておく */
-  .skill-card {
-    border: 1px solid rgba(0, 255, 204, 0.4);
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
-  }
-  /* 紙飛行機なども、ホバーなしで最初から定位置に表示、または常時フワフワ動かす */
-  .paper-plane {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: wave-motion 3s ease-in-out infinite; /* 常時微小に動かすアニメ */
-  }
-}
+// /* タッチデバイス（スマホ・タブレット）用の調整 */
+// @media (hover: none) {
+//   /* スマホの時は最初から枠をほんのり光らせておく */
+//   .skill-card {
+//     border: 1px solid rgba(0, 255, 204, 0.4);
+//     box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+//   }
+//   /* 紙飛行機なども、ホバーなしで最初から定位置に表示、または常時フワフワ動かす */
+//   // .paper-plane {
+//   //   opacity: 1 !important;
+//   //   transform: none !important;
+//   //   animation: wave-motion 3s ease-in-out infinite; /* 常時微小に動かすアニメ */
+//   // }
+// }
 
 @keyframes wave-motion {
   0%,
