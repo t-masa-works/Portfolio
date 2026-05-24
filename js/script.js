@@ -268,7 +268,7 @@ function forceSkipToContent() {
   sectionAbout.scrollIntoView({ behavior: "smooth" });
 }
 
-// マウスホイールの回転、またはスマホのタッチスクロールを検知してスキップを発火
+// マウスホイールの回転を検知してスキップを発火
 window.addEventListener(
   "wheel",
   (e) => {
