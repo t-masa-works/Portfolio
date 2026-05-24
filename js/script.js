@@ -43,13 +43,13 @@ function startHeroAnimation() {
   readyText.classList.add("blink-animation");
 
   // 一定時間後にループ動画へ遷移する既存のタイマー
-  if (!isFireVideoPlaying) {
-    setTimeout(() => {
-      if (openVideo.style.opacity === "1") {
-        transitionToLoop();
-      }
-    }, 4500); // Change.webmの長さに合わせて調整してください
-  }
+  // if (!isFireVideoPlaying) {
+  //   setTimeout(() => {
+  //     if (openVideo.style.opacity === "1") {
+  //       transitionToLoop();
+  //     }
+  //   }, 4500); // Change.webmの長さに合わせて調整してください
+  // }
 }
 // 1. マウスホバーで開始
 // --- トリガーの分岐 ---
