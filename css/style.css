@@ -756,8 +756,8 @@ section {
    ========================================================================== */
 .section-mission {
   position: relative;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(10, 10, 15, 0.45)), to(rgba(10, 10, 15, 0.85))), url("../Images/Cross-Hand.jpg");
-  background-image: linear-gradient(rgba(10, 10, 15, 0.45), rgba(10, 10, 15, 0.85)), url("../Images/Cross-Hand.jpg");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(10, 10, 15, 0.45)), to(rgba(10, 10, 15, 0.85))), url("/Images/Cross-Hand.jpg");
+  background-image: linear-gradient(rgba(10, 10, 15, 0.45), rgba(10, 10, 15, 0.85)), url("/Images/Cross-Hand.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* これを指定するだけでパララックス（視差効果）になります！ */

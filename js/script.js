@@ -17,19 +17,19 @@ const slider = document.getElementById("baSlider");
 
 let leaveTimer = null;
 let isFireVideoPlaying = false; // fireVideo が再生中かどうかのフラグ
+// タッチデバイス（スマホ）かどうかの判定フラグ
+const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
-// 1. マウスホバーで開始
-container.addEventListener("mouseenter", () => {
-  if (leaveTimer) {
-    clearTimeout(leaveTimer);
-    leaveTimer = null;
-  }
-
+// アニメーションを一括で開始する共通関数
+function startHeroAnimation() {
   staticImg.style.opacity = "0";
   clickText.style.display = "none";
   skipText.style.display = "block";
 
   openVideo.style.display = "block";
+  openVideo.muted = true; // スマホの自動再生には必須
+  openVideo.play().catch((err) => console.log("再生エラー防止:", err));
+
   requestAnimationFrame(() => {
     openVideo.style.opacity = "1";
   });
@@ -42,8 +42,32 @@ container.addEventListener("mouseenter", () => {
   void readyText.offsetWidth;
   readyText.classList.add("blink-animation");
 
-  openVideo.play();
-});
+  // 一定時間後にループ動画へ遷移する既存のタイマー
+  if (!isFireVideoPlaying) {
+    setTimeout(() => {
+      if (openVideo.style.opacity === "1") {
+        transitionToLoop();
+      }
+    }, 4500); // Change.webmの長さに合わせて調整してください
+  }
+}
+// 1. マウスホバーで開始
+// --- トリガーの分岐 ---
+if (isTouchDevice) {
+  // スマホの場合は、画面が開いて1秒後に自動で演出を開始させる
+  window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(startHeroAnimation, 1000);
+  });
+} else {
+  // PCの場合は、従来通りマウスが入った時に開始
+  container.addEventListener("mouseenter", () => {
+    if (leaveTimer) {
+      clearTimeout(leaveTimer);
+      leaveTimer = null;
+    }
+    startHeroAnimation();
+  });
+}
 
 // 2. 開眼動画が終わったら炎動画へ
 openVideo.addEventListener("ended", () => {
@@ -194,13 +218,20 @@ const observerCallback = (entries) => {
 const observer = new IntersectionObserver(observerCallback, observerOptions);
 observer.observe(container);
 
-sectionAbout.addEventListener("mouseenter", () => {
-  profVideo.play();
-});
+const profVideoObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        profVideo.play(); // 画面に入ったら再生
+      } else {
+        profVideo.pause(); // 画面から消えたら停止して負荷軽減
+      }
+    });
+  },
+  { threshold: 0.2 },
+); // 20%画面に入ったら発火
 
-sectionAbout.addEventListener("mouseleave", () => {
-  profVideo.pause();
-});
+profVideoObserver.observe(sectionAbout);
 
 // スキップ処理を1つの関数にまとめる
 function forceSkipToContent() {
@@ -249,17 +280,14 @@ window.addEventListener(
   { passive: true },
 );
 
-window.addEventListener(
-  "touchmove",
-  (e) => {
-    // スマホでのスクロール操作でもスキップ
-    forceSkipToContent();
-  },
-  { passive: true },
-);
-
-// 既存の「Skipテキスト」をクリックした時も、この関数を呼ぶように紐付ける
-skipText.addEventListener("click", forceSkipToContent);
+if (skipText) skipText.addEventListener("click", (e) => {
+  e.stopPropagation(); // 予期せぬ暴発を防ぐ
+  forceSkipToContent();
+});
+if (clickText) clickText.addEventListener("click", (e) => {
+  e.stopPropagation();
+  forceSkipToContent();
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const target = document.querySelector(".fade-up-trigger");
