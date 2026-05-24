@@ -322,9 +322,9 @@ if (assistToggleBtn && uxCard) {
 
     // ボタンのテキストを変更
     if (uxCard.classList.contains("accessible-mode")) {
-      assistToggleBtn.textContent = "[ Normal Mode に戻す ]";
+      assistToggleBtn.textContent = "[ Click System: Normal Mode に戻す ]";
     } else {
-      assistToggleBtn.textContent = "[ System: Assist Mode ]";
+      assistToggleBtn.textContent = "[ Click System: Assist Mode ]";
     }
   });
 }

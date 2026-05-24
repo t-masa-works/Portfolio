@@ -359,7 +359,7 @@ section {
 }
 
 /* ==========================================================================
-   Section 2: Skills (制作実績)
+   Section 2: Skills (制作スキル)
    ========================================================================== */
 .section-intro {
   text-align: center;
@@ -369,7 +369,7 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 30px;
 }
 
@@ -459,8 +459,6 @@ section {
   .skill-card-desc .paper-plane {
     /* タッチデバイスでは常に表示 */
     opacity: 1 !important;
-    -webkit-transform: none !important;
-            transform: none !important;
     -webkit-animation: wave-motion 3s ease-in-out infinite;
             animation: wave-motion 3s ease-in-out infinite; /* 常時微小に動かすアニメ */
   }
@@ -476,8 +474,8 @@ section {
 }
 .skill-card-desc:hover .paper-plane {
   opacity: 1;
-  -webkit-transform: translate(350px, -200px) scale(1.2);
-          transform: translate(350px, -200px) scale(1.2);
+  -webkit-transform: translate(500px, -200px) scale(1.2);
+          transform: translate(500px, -200px) scale(1.2);
 }
 
 @-webkit-keyframes rotateBorder {
@@ -564,7 +562,66 @@ section {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.comparison-slider {
+  /* ツマミのデザイン拡張 */
+}
+.comparison-slider .slider-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  /* 矢印の文字 */
+}
+.comparison-slider .slider-button .slider-arrow {
+  color: #00ffcc;
+  font-size: 12px;
+  font-weight: bold;
+  -webkit-animation: pulse-blink 1.5s infinite;
+          animation: pulse-blink 1.5s infinite;
+}
+.comparison-slider .slider-button {
+  /* 上部に浮き出るヒントテキスト */
+}
+.comparison-slider .slider-button .slider-tip-text {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: #00ffcc;
+  color: #000;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  -webkit-animation: pulse-blink 1.5s infinite;
+          animation: pulse-blink 1.5s infinite;
+}
 
+@-webkit-keyframes pulse-blink {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-blink {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 /* After画像をクリッピングするラッパー */
 .img-after-wrapper {
   position: absolute;
@@ -806,7 +863,7 @@ section {
   background-image: linear-gradient(rgba(10, 10, 15, 0.45), rgba(10, 10, 15, 0.85)), url("../Images/cross-hand.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* これを指定するだけでパララックス（視差効果）になります！ */
+  background-attachment: fixed; /* パララックス効果 */
   overflow: hidden;
 }
 .section-mission .mission-text {
