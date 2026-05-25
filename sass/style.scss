@@ -96,15 +96,15 @@ body {
   transform: translate(-50%, -50%);
   transition: opacity 0.4s ease;
   z-index: 10; /* 動画より確実に前に出す */
-  
+
   /* ★最重要：子要素を縦並びの完全中央揃えにする */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   /* 画面幅いっぱいに広げて左右の見切れを防ぐ（余白は左右20px確保） */
-  width: calc(100% - 40px); 
+  width: calc(100% - 40px);
   max-width: 800px;
   text-align: center;
 }
@@ -113,7 +113,7 @@ body {
 .system-ready {
   display: block;
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(1.2rem, 4vw, 2rem); 
+  font-size: clamp(1.2rem, 4vw, 2rem);
   color: #00ffcc;
   margin-bottom: 15px; /* メインタイトルとの隙間 */
   white-space: nowrap; /* 勝変な改行を防ぐ */
@@ -121,11 +121,11 @@ body {
 
 /* 「System:Override...」などのメインタイトルの設定 */
 .main-title,
-.hero-text::after { 
+.hero-text::after {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   animation: glitch 4s infinite;
-  font-size: clamp(2rem, 6vw, 4.5rem); 
+  font-size: clamp(2rem, 6vw, 4.5rem);
   color: #ffffff;
   text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
 }
@@ -142,7 +142,7 @@ body {
   white-space: nowrap;
   transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(1.2rem, 4vw, 2rem); 
+  font-size: clamp(1.2rem, 4vw, 2rem);
   color: #00ffcc;
   opacity: 1;
   animation: blink 1s step-end infinite;
@@ -157,7 +157,7 @@ body {
   white-space: nowrap;
   transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(1.2rem, 4vw, 2rem); 
+  font-size: clamp(1.2rem, 4vw, 2rem);
   color: #00ffcc;
   // opacity: 0;
   animation: blink 1s step-end infinite;
@@ -889,6 +889,10 @@ section {
       &:focus {
         border-color: variables.$color-primary;
         outline: none;
+        &:invalid {
+          border-color: #ff3333 !important;
+          background-color: rgba(255, 51, 51, 0.05);
+        }
       }
     }
   }
@@ -909,6 +913,16 @@ section {
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+    }
+
+    &:disabled,
+    .is-disabled {
+      background-color: #333333 !important; /* 暗いグレーに */
+      color: #666666 !important; /* 文字色も暗く */
+      border-color: #444444 !important;
+      cursor: not-allowed !important; /* カーソルを禁止マークに */
+      box-shadow: none !important; /* ネオンの発光を消す */
+      opacity: 0.6;
     }
   }
 }

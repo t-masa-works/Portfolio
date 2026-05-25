@@ -41,15 +41,6 @@ function startHeroAnimation() {
   readyText.classList.remove("blink-animation");
   void readyText.offsetWidth;
   readyText.classList.add("blink-animation");
-
-  // 一定時間後にループ動画へ遷移する既存のタイマー
-  // if (!isFireVideoPlaying) {
-  //   setTimeout(() => {
-  //     if (openVideo.style.opacity === "1") {
-  //       transitionToLoop();
-  //     }
-  //   }, 4500); // Change.webmの長さに合わせて調整してください
-  // }
 }
 // 1. マウスホバーで開始
 // --- トリガーの分岐 ---
@@ -341,3 +332,54 @@ if (slider) {
     sliderButton.style.left = slideValue;
   });
 }
+
+// 1. フォームと入力欄、送信ボタンを正しく取得
+const contactForm = document.getElementById("contact-form"); // 実際のformのIDに書き換えてください
+const inputFields = document.querySelectorAll(".form-group input, .form-group textarea"); // 各入力欄のクラス名
+const submitBtn = document.querySelector(".submit-btn"); // 送信ボタンのクラス名、またはID
+
+// ボタンの有効・無効を切り替える共通の関数
+function toggleSubmitButton() {
+  // inputFields（すべての入力欄）の中に、1つでもバリデーション（ requiredなど ）に違反しているものがあるかチェック
+  // checkValidity() が false のものが1つでもあるか、フォーム全体の検証を行います
+  
+  let isFormValid = true;
+  
+  inputFields.forEach((field) => {
+    if (!field.checkValidity()) {
+      isFormValid = false; // 1つでもエラー（未入力など）があれば不合格
+    }
+  });
+
+  if (isFormValid) {
+    submitBtn.disabled = false; // すべてOKならボタンを活性化
+    submitBtn.classList.remove("is-disabled"); // 見た目のグレーアウトを解除するクラス
+  } else {
+    submitBtn.disabled = true;  // エラーがあればボタンを無効化（クリック不可）
+    submitBtn.classList.add("is-disabled");    // 見た目をグレーアウトするクラス
+  }
+}
+
+// 2. ページ読み込み時に、初期状態としてまずボタンを無効化しておく
+document.addEventListener("DOMContentLoaded", () => {
+  toggleSubmitButton();
+});
+
+// 3. 各入力欄でユーザーが文字を打つたびにリアルタイムチェック
+inputFields.forEach((field) => {
+  field.addEventListener("input", () => {
+    // 個別の赤枠制御（ブラウザ標準のチェック機能を利用）
+    if (field.checkValidity()) {
+      field.classList.remove("invalid");
+    } else {
+      // ユーザーが一度も触っていない初期状態から赤くなるのを防ぐため、
+      // 文字が入力されている、またはフォーカスが外れた時などに絞るのが親切です
+      if (field.value.trim() !== "") {
+        field.classList.add("invalid");
+      }
+    }
+
+    // ★文字が打たれる度に、すべての入力欄を再チェックしてボタンの状態を更新
+    toggleSubmitButton();
+  });
+});
