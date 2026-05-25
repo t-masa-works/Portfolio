@@ -85,38 +85,53 @@ body {
   transition: opacity 0.4s ease;
 }
 
+/* ==========================================================================
+   ヒーローヘッダー テキスト（レスポンシブ完全中央揃え）
+   ========================================================================== */
+
 .hero-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 0.4s ease;
+  z-index: 10; /* 動画より確実に前に出す */
+  
+  /* ★最重要：子要素を縦並びの完全中央揃えにする */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* 画面幅いっぱいに広げて左右の見切れを防ぐ（余白は左右20px確保） */
+  width: calc(100% - 40px); 
+  max-width: 800px;
+  text-align: center;
 }
 
+/* 「System:Ready...」の設定 */
 .system-ready {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 1;
-  transition: opacity 0.4s ease;
   display: block;
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.8em; /* メインタイトルより小さく */
-  color: #00ffcc; /* コンソール風の色 */
-  margin-bottom: 10px;
+  font-size: clamp(1.2rem, 4vw, 2rem); 
+  color: #00ffcc;
+  margin-bottom: 15px; /* メインタイトルとの隙間 */
+  white-space: nowrap; /* 勝変な改行を防ぐ */
+}
+
+/* 「System:Override...」などのメインタイトルの設定 */
+.main-title,
+.hero-text::after { 
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  animation: glitch 4s infinite;
+  font-size: clamp(2rem, 6vw, 4.5rem); 
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
 }
 
 .blink-animation {
   animation: blink 0.5s step-end 6 forwards;
-}
-
-.main-title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: glitch 4s infinite;
 }
 
 .skip-text {
@@ -124,9 +139,10 @@ body {
   bottom: 20px;
   left: 50%;
   top: 70%;
+  white-space: nowrap;
   transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.5em;
+  font-size: clamp(1.2rem, 4vw, 2rem); 
   color: #00ffcc;
   opacity: 1;
   animation: blink 1s step-end infinite;
@@ -138,9 +154,10 @@ body {
   bottom: 60px;
   left: 50%;
   top: 70%;
+  white-space: nowrap;
   transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.5em;
+  font-size: clamp(1.2rem, 4vw, 2rem); 
   color: #00ffcc;
   // opacity: 0;
   animation: blink 1s step-end infinite;
