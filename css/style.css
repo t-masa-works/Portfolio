@@ -1005,6 +1005,11 @@ section {
   border-color: #00f2fe;
   outline: none;
 }
+.section-contact .form-group input:focus:invalid,
+.section-contact .form-group textarea:focus:invalid {
+  border-color: #ff3333 !important;
+  background-color: rgba(255, 51, 51, 0.05);
+}
 .section-contact .submit-btn {
   width: 100%;
   padding: 15px;
@@ -1024,6 +1029,16 @@ section {
           transform: translateY(-2px);
   -webkit-box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
           box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+}
+.section-contact .submit-btn:disabled,
+.section-contact .submit-btn .is-disabled {
+  background-color: #333333 !important; /* 暗いグレーに */
+  color: #666666 !important; /* 文字色も暗く */
+  border-color: #444444 !important;
+  cursor: not-allowed !important; /* カーソルを禁止マークに */
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important; /* ネオンの発光を消す */
+  opacity: 0.6;
 }
 
 /* ==========================================================================
