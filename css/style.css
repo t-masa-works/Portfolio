@@ -139,7 +139,7 @@ body {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #00ffcc;
   opacity: 1;
   -webkit-animation: blink 1s step-end infinite;
@@ -156,7 +156,7 @@ body {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #00ffcc;
   -webkit-animation: blink 1s step-end infinite;
           animation: blink 1s step-end infinite;
